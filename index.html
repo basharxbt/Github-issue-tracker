@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github issue Tracker || Login Page</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+
+    <style>
+      body {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="flex flex-col justify-center min-h-screen">
+      <div class="p-8 w-[560px] m-auto shadow-2xl rounded-lg">
+        <div class="flex flex-col items-center">
+          <img src="./assets/github-logo.png" alt="" />
+          <h1 class="font-semibold text-2xl">GitHub Issues Tracker</h1>
+          <p class="text-[16px] text-neutral/70">
+            Sign in to manage your issues
+          </p>
+        </div>
+        <div class="space-y-2">
+          <label class="font-medium" for="username">Username</label>
+          <br />
+          <input
+            id="username-input"
+            class="w-full p-2 border-neutral/10 rounded-lg"
+            type="text"
+            placeholder="Enter Username"
+            maxlength="10"
+          />
+
+          <p class="text-red-500">Default: admin</p>
+          <label class="font-medium" for="password">Password</label> <br />
+          <input
+            id="password-input"
+            class="w-full p-2 border-neutral/10 rounded-lg"
+            type="password"
+            placeholder="Enter Password"
+            minlength="4"
+            maxlength="10"
+          />
+          <p class="text-red-500">Default: admin123</p>
+          <button
+            id="login-btn"
+            class="btn btn-primary w-full rounded-lg p-6 text-[16px]"
+          >
+            Sing in
+          </button>
+          <div class="text-center space-y-4 my-8">
+            <p class="">OR</p>
+            <p>Demo Credentials:</p>
+            <div class="bg-neutral-100 p-5 rounded-xl">
+              <p><span class="font-medium">Username:</span> admin</p>
+              <p><span class="font-medium">Password:</span> admin123</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="./script.js"></script>
+  </body>
+</html>
