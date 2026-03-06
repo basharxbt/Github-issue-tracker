@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github issue Tracker || Home</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+
+    <style>
+      body {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Daisyui -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="">
+    <nav>
+      <div class="navbar bg-base-100 shadow-sm px-20 flex justify-between">
+        <div class="flex items-center gap">
+          <i class="fa-brands fa-github fa-2xl"></i>
+          <p class="font-semibold text-2xl">GitHub Issues Tracker</p>
+        </div>
+        <div class="flex gap-3">
+          <label class="input">
+            <svg
+              class="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input type="search" required placeholder="Search issues..." />
+          </label>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> New Issue
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="w-10/12 m-auto">
+      <section
+        class="mt-16 mb-5 p-6 border-2 border-neutral-100 shadow-sm rounded-xl"
+      >
+        <div class="flex gap-2">
+          <button class="btn px-8">All</button>
+          <button class="btn px-8">Open</button>
+          <button class="btn px-8">Closed</button>
+        </div>
+      </section>
+      <section class="flex justify-between p-6 border-2 border-neutral-100 shadow-sm rounded-xl"">
+        <div class="flex gap-2">
+          <img class="w-8 h-8" src="./assets/Aperture.png" alt="" />
+          <div>
+            <p class="font-semibold">
+              <span>0</span>
+              Issues
+            </p>
+            <p>Track and manage your project issues</p>
+          </div>
+        </div>
+        <div class="flex gap-2 items-center">
+          <p> <i class="fa-solid fa-circle" style="color: rgb(0, 237, 33);"></i> Open</p>
+          <p><i class="fa-solid fa-circle" style="color: rgb(135, 96, 246);"></i> closed</p>
+        </div>
+      </section>
+      <section id="issues" class="grid grid-cols-4">
+    <div class="bg-slate-200 p-4">
+  <div class="flex justify-between ">
+        <img src="./assets/Open-Status.png" alt="" />
+        <p>High</p>
+      </div>
+      <h3>Fix navigation menu on mobile devices</h3>
+      <p>The navigation menu doesn't collapse properly on mobile devices...</p>
+      <div>
+        <p>BUG</p>
+        <p>HELP WANTED</p>
+        <hr />
+        <p>#1 by john_lee</p>
+
+        <p>1/15/2024</p>
+      </div>
+
+    </div>
+    </section>
+    </main>
+  </body>
+</html>
