@@ -53,13 +53,13 @@ const issueModalDetails = (id) => {
 const displayModal = (modal) => {
   const modalContainer = document.getElementById("modalInfo");
   modalContainer.innerHTML = `
-   <div  class="p-2 rounded-lg space-y-3">
+   <div  class="p-2 rounded-lg space-y-4">
   
       <h3 class="font-semibold text-[20px]"> ${modal.title} </h3>
-     <div class="flex gap-2"> 
+     <div class="flex gap-3"> 
       <p class="bg-green-700 rounded-2xl text-white px-3">${modal.status}</p>
-    <p>${modal.author}</p>
-    <p>${new Date(modal.updatedAt).toLocaleDateString("en-US")}</p>
+    <p> <i class="fa-solid fa-circle fa-sm"></i> ${modal.author}</p>
+    <p><i class="fa-solid fa-circle fa-sm"></i> ${new Date(modal.updatedAt).toLocaleDateString("en-US")}</p>
     </div>
       <div class="flex gap-2">
        ${bugArray(modal.labels)}
