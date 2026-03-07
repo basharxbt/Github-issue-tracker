@@ -40,6 +40,53 @@ const priorityAll = (priority) => {
     return `<p class="bg-gray-300 px-6 text-neutral-900 rounded-2xl">${priority}</p> `;
   }
 };
+
+const issueModalDetails = (id) => {
+  console.log(id);
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+    .then((response) => response.json())
+    .then((modal) => {
+      displayModal(modal.data);
+    });
+};
+
+const displayModal = (modal) => {
+  const modalContainer = document.getElementById("modalInfo");
+  modalContainer.innerHTML = `
+   <div  class="p-2 rounded-lg space-y-3">
+  
+      <h3 class="font-semibold text-[20px]"> ${modal.title} </h3>
+     <div class="flex gap-2"> 
+      <p class="bg-green-700 rounded-2xl text-white px-3">${modal.status}</p>
+    <p>${modal.author}</p>
+    <p>${new Date(modal.updatedAt).toLocaleDateString("en-US")}</p>
+    </div>
+      <div class="flex gap-2">
+       ${bugArray(modal.labels)}
+        </div>
+    <p class="text-neutral/60">${modal.description}</p>
+    
+ <div class="flex justify-between bg-gray-200 rounded-lg p-3">
+  <div>
+    <p  class="text-neutral/70">Assignee:</p>
+    <p class="text-[16px] font-semibold">${modal.assignee}</p>
+  </div>
+  <div>
+    <p  class="text-neutral/70">Priority:</p>
+     ${priorityAll(modal.priority)}
+
+
+  </div>
+ </div>
+
+       
+
+    </div>
+  
+  `;
+  document.getElementById("issue_modal").showModal();
+};
+
 let toggleStatus = [];
 const issues = () => {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
@@ -66,7 +113,7 @@ const displayIssues = (issues) => {
 
     if (status === "open") {
       issueDiv.innerHTML = `
-         <div class=" shadow-xl p-5 border-t-3 border-green-500 rounded-lg space-y-3">
+         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-green-500 rounded-lg space-y-3">
   <div class="flex justify-between h-full ">
         <img src="./assets/Open-Status.png" alt="" />
        ${priorityAll(issue.priority)}
@@ -89,7 +136,7 @@ const displayIssues = (issues) => {
     `;
     } else if (status === "closed") {
       issueDiv.innerHTML = `
-         <div class=" shadow-xl p-5 border-t-3 border-purple-500 rounded-lg space-y-3">
+         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-purple-500 rounded-lg space-y-3">
   <div class="flex justify-between h-full ">
         <img src="./assets/Closed- Status .png" alt="" />
         ${priorityAll(issue.priority)}
@@ -116,17 +163,6 @@ const displayIssues = (issues) => {
   });
   totalCount();
 };
-
-// allBtn.addEventListener("click", () => {});
-
-// openBtn.addEventListener("click", () => {});
-
-// closedBtn.addEventListener("click", () => {
-//   const closedIssues = toggleStatus.filter(
-//     (issue) => issue.status === "closed",
-//   );
-//   displayIssues(closedIssues);
-// });
 
 const totalCount = () => {
   const issuCount = document.getElementById("issue-count");
