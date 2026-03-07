@@ -77,9 +77,9 @@
         class="mt-16 mb-5 p-6 border-2 border-neutral-100 shadow-sm rounded-xl"
       >
         <div class="flex gap-2">
-          <button class="btn px-8">All</button>
-          <button class="btn px-8">Open</button>
-          <button class="btn px-8">Closed</button>
+          <button id="all-btn"  onclick="issues()"  class="btn px-8 btn-primary">All</button>
+          <button id="open-btn" class="btn px-8">Open</button>
+          <button id="closed-btn" class="btn px-8">Closed</button>
         </div>
       </section>
       <section class="flex justify-between p-6 border-2 border-neutral-100 shadow-sm rounded-xl"">
@@ -98,25 +98,13 @@
           <p><i class="fa-solid fa-circle" style="color: rgb(135, 96, 246);"></i> closed</p>
         </div>
       </section>
-      <section id="issues" class="grid grid-cols-4">
-    <div class="bg-slate-200 p-4">
-  <div class="flex justify-between ">
-        <img src="./assets/Open-Status.png" alt="" />
-        <p>High</p>
-      </div>
-      <h3>Fix navigation menu on mobile devices</h3>
-      <p>The navigation menu doesn't collapse properly on mobile devices...</p>
-      <div>
-        <p>BUG</p>
-        <p>HELP WANTED</p>
-        <hr />
-        <p>#1 by john_lee</p>
+      <section  class=" mt-10 border-2 border-neutral-100 rounded-md
+      ">
+   <div id="issues-container" class="grid grid-cols-4 p-5 gap-3 ">
 
-        <p>1/15/2024</p>
-      </div>
-
-    </div>
+   </div>
     </section>
     </main>
+    <script src="./issue.js"></script>
   </body>
 </html>
