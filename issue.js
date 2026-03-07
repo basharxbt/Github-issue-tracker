@@ -1,3 +1,7 @@
+const allBtn = document.getElementById("all-btn");
+const openBtn = document.getElementById("open-btn");
+const closedBtn = document.getElementById("closed-btn");
+
 const bugArray = (arr) => {
   const bugElement = arr.map((bug) => {
     if (bug === "bug") {
@@ -36,21 +40,19 @@ const priorityAll = (priority) => {
     return `<p class="bg-gray-300 px-6 text-neutral-900 rounded-2xl">${priority}</p> `;
   }
 };
-
+let toggleStatus = [];
 const issues = () => {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      displayIssues(data.data);
+      toggleStatus = data.data;
+      displayIssues(toggleStatus);
     });
 };
 
 const displayIssues = (issues) => {
   const issuesContainer = document.getElementById("issues-container");
-  const allBtn = document.getElementById("all-btn");
-  const openBtn = document.getElementById("open-btn");
-  const closedBtn = document.getElementById("closed-btn");
 
   const toggleStatus = "allBtn";
   issuesContainer.innerHTML = "";
@@ -58,11 +60,12 @@ const displayIssues = (issues) => {
     const issueDiv = document.createElement("div");
     const status = issue.status;
     const priority = issue.priority;
-    console.log(priority);
 
     if (toggleStatus === "allBtn") {
-      if (status === "open") {
-        issueDiv.innerHTML = `
+    }
+
+    if (status === "open") {
+      issueDiv.innerHTML = `
          <div class=" shadow-xl p-5 border-t-3 border-green-500 rounded-lg space-y-3">
   <div class="flex justify-between h-full ">
         <img src="./assets/Open-Status.png" alt="" />
@@ -84,8 +87,8 @@ const displayIssues = (issues) => {
     </div>
     
     `;
-      } else if (status === "closed") {
-        issueDiv.innerHTML = `
+    } else if (status === "closed") {
+      issueDiv.innerHTML = `
          <div class=" shadow-xl p-5 border-t-3 border-purple-500 rounded-lg space-y-3">
   <div class="flex justify-between h-full ">
         <img src="./assets/Closed- Status .png" alt="" />
@@ -107,11 +110,50 @@ const displayIssues = (issues) => {
     </div>
     
     `;
-      }
     }
 
     issuesContainer.appendChild(issueDiv);
   });
+  totalCount();
+};
+
+// allBtn.addEventListener("click", () => {});
+
+// openBtn.addEventListener("click", () => {});
+
+// closedBtn.addEventListener("click", () => {
+//   const closedIssues = toggleStatus.filter(
+//     (issue) => issue.status === "closed",
+//   );
+//   displayIssues(closedIssues);
+// });
+
+const totalCount = () => {
+  const issuCount = document.getElementById("issue-count");
+  const allCount = document.getElementById("issues-container").children.length;
+  issuCount.innerText = allCount;
+  console.log(allCount);
+};
+
+const clickToggle = (id) => {
+  allBtn.classList.remove("btn-primary");
+  openBtn.classList.remove("btn-primary");
+  closedBtn.classList.remove("btn-primary");
+
+  document.getElementById(id).classList.add("btn-primary");
+
+  if (id === "all-btn") {
+    issues();
+    displayIssues(toggleStatus);
+  } else if (id === "open-btn") {
+    const openIssues = toggleStatus.filter((issue) => issue.status === "open");
+    displayIssues(openIssues);
+  } else if (id === "closed-btn") {
+    const closedIssues = toggleStatus.filter(
+      (issue) => issue.status === "closed",
+    );
+    displayIssues(closedIssues);
+  }
 };
 
 issues();
