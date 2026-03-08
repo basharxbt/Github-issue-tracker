@@ -109,7 +109,7 @@ const displayIssues = (issues) => {
 
     if (status === "open") {
       issueDiv.innerHTML = `
-         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-green-500 rounded-lg space-y-3">
+         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-green-500 rounded-lg space-y-3 min-h-[350px]">
   <div class="flex justify-between h-full ">
         <img src="./assets/Open-Status.png" alt="" />
        ${priorityAll(issue.priority)}
@@ -119,7 +119,7 @@ const displayIssues = (issues) => {
       <div class="flex gap-2">
        ${bugArray(issue.labels)}
         </div>
-        <hr>
+        <hr class="border-neutral/20">
         <span class="border-t-2"></span>
         <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
         <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
@@ -128,7 +128,7 @@ const displayIssues = (issues) => {
     `;
     } else if (status === "closed") {
       issueDiv.innerHTML = `
-         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-purple-500 rounded-lg space-y-3">
+         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-purple-500 rounded-lg space-y-3 min-h-[350px]">
   <div class="flex justify-between h-full ">
         <img src="./assets/Closed- Status .png" alt="" />
         ${priorityAll(issue.priority)}
@@ -138,7 +138,7 @@ const displayIssues = (issues) => {
       <div class="flex gap-2">
         ${bugArray(issue.labels)}
         </div>
-        <hr>
+       <hr class="border-neutral/20">
         <span class="border-t-2"></span>
         <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
         <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>

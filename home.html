@@ -40,7 +40,9 @@
   </head>
   <body class="">
     <nav>
-      <div class="navbar bg-base-100 shadow-sm px-20 flex justify-between">
+      <div
+        class="navbar bg-base-100 shadow-sm px-20 flex-col gap-4 md:flex-row justify-between"
+      >
         <div class="flex items-center gap">
           <i class="fa-brands fa-github fa-2xl"></i>
           <p class="font-semibold text-2xl">GitHub Issues Tracker</p>
@@ -63,27 +65,49 @@
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input id="search-input" type="search" required placeholder="Search issues..." />
+            <input
+              id="search-input"
+              type="search"
+              required
+              placeholder="Search issues..."
+            />
           </label>
-          <button id="search-btn" class="btn btn-primary">
-            Search
-          </button>
+          <button id="search-btn" class="btn btn-primary">Search</button>
         </div>
       </div>
     </nav>
 
     <main class="w-10/12 m-auto">
-     
       <section
-        class="mt-16 mb-5 p-6 border-2 border-neutral-100 shadow-sm rounded-xl"
+        class="mt-10 md:mt-16 mb-5 p-6 border-2 border-neutral-100 shadow-sm rounded-xl"
       >
-        <div class="flex gap-2">
-          <button id="all-btn" onclick="clickToggle('all-btn') "  class="btn px-8 btn-primary">All</button>
-          <button id="open-btn" onclick="clickToggle('open-btn')"" class="btn px-8">Open</button>
-          <button id="closed-btn" onclick="clickToggle('closed-btn')" class="btn px-8">Closed</button>
+        <div class="grid grid-cols-1 md:flex gap-2">
+          <button
+            id="all-btn"
+            onclick="clickToggle('all-btn')"
+            class="btn px-8 btn-primary"
+          >
+            All
+          </button>
+          <button
+            id="open-btn"
+            onclick="clickToggle('open-btn')"
+            class="btn px-8"
+          >
+            Open
+          </button>
+          <button
+            id="closed-btn"
+            onclick="clickToggle('closed-btn')"
+            class="btn px-8"
+          >
+            Closed
+          </button>
         </div>
       </section>
-      <section class="flex justify-between p-6 border-2 border-neutral-100 shadow-sm rounded-xl"">
+      <section
+        class="flex justify-between p-6 border-2 border-neutral-100 shadow-sm rounded-xl"
+      >
         <div class="flex gap-2">
           <img class="w-8 h-8" src="./assets/Aperture.png" alt="" />
           <div>
@@ -95,38 +119,46 @@
           </div>
         </div>
         <div class="flex gap-2 items-center">
-          <p> <i class="fa-solid fa-circle" style="color: rgb(0, 237, 33);"></i> Open</p>
-          <p><i class="fa-solid fa-circle" style="color: rgb(135, 96, 246);"></i> closed</p>
+          <p>
+            <i class="fa-solid fa-circle" style="color: rgb(0, 237, 33)"></i>
+            Open
+          </p>
+          <p>
+            <i class="fa-solid fa-circle" style="color: rgb(135, 96, 246)"></i>
+            closed
+          </p>
         </div>
       </section>
-       <section
+      <section
         id="spinner"
-        class="flex justify-center items-center py-20 hiden"
+        class="flex justify-center items-center py-20 hidden"
       >
         <span
           class="loading loading-spinner text-primary loading-lg w-15 h-15"
         ></span>
       </section>
-      <section  class=" mt-10 border-2 border-neutral-100 rounded-md
-      ">
-   <div id="issues-container" class="grid grid-cols-4 p-5 gap-3 ">
 
-   </div>
-    </section>
-    <!-- Open the modal using ID.showModal() method
-<button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-<dialog id="issue_modal" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box">
-<div id="modalInfo"></div>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn btn-primary">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
+      <!-- Issues Section -->
 
+      <section class="mt-10 border-2 border-neutral-100 rounded-md">
+        <div
+          id="issues-container"
+          class="grid md:grid-cols-2 lg:grid-cols-3 p-5 gap-3"
+        ></div>
+      </section>
+
+      <!-- Modal -->
+
+      <dialog id="issue_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <div id="modalInfo"></div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn btn-primary">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
     <script src="./issue.js"></script>
   </body>
