@@ -31,16 +31,6 @@ const bugArray = (arr) => {
   return bugElement.join(" ");
 };
 
-const priorityAll = (priority) => {
-  if (priority === "high") {
-    return `<p class="bg-red-200 px-6  rounded-2xl">${priority}</p> `;
-  } else if (priority === "medium") {
-    return `<p class="bg-yellow-100 px-6 text-yellow-700  rounded-2xl">${priority}</p> `;
-  } else if (priority === "low") {
-    return `<p class="bg-gray-300 px-6 text-neutral-900 rounded-2xl">${priority}</p> `;
-  }
-};
-
 const issueModalDetails = (id) => {
   console.log(id);
   fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
@@ -69,7 +59,7 @@ const displayModal = (modal) => {
  <div class="flex justify-between bg-gray-200 rounded-lg p-3">
   <div>
     <p  class="text-neutral/70">Assignee:</p>
-    <p class="text-[16px] font-semibold">${modal.assignee}</p>
+    <p class="text-[16px] font-semibold">${modal.assignee ? modal.assignee : "Unknown"}</p>
   </div>
   <div>
     <p  class="text-neutral/70">Priority:</p>
@@ -98,18 +88,24 @@ const issues = () => {
     });
 };
 
+const priorityAll = (priority) => {
+  if (priority === "high") {
+    return `<p class="bg-red-200 px-6  rounded-2xl">${priority}</p> `;
+  } else if (priority === "medium") {
+    return `<p class="bg-yellow-100 px-6 text-yellow-700  rounded-2xl">${priority}</p> `;
+  } else if (priority === "low") {
+    return `<p class="bg-gray-300 px-6 text-neutral-900 rounded-2xl">${priority}</p> `;
+  }
+};
+
 const displayIssues = (issues) => {
   const issuesContainer = document.getElementById("issues-container");
-
-  const toggleStatus = "allBtn";
   issuesContainer.innerHTML = "";
   issues.forEach((issue) => {
+    manageSpinner(true);
     const issueDiv = document.createElement("div");
     const status = issue.status;
     const priority = issue.priority;
-
-    if (toggleStatus === "allBtn") {
-    }
 
     if (status === "open") {
       issueDiv.innerHTML = `
@@ -124,13 +120,9 @@ const displayIssues = (issues) => {
        ${bugArray(issue.labels)}
         </div>
         <hr>
-
         <span class="border-t-2"></span>
         <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
-
         <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
-      
-
     </div>
     
     `;
@@ -147,49 +139,81 @@ const displayIssues = (issues) => {
         ${bugArray(issue.labels)}
         </div>
         <hr>
-
         <span class="border-t-2"></span>
         <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
-
         <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
-      
-
     </div>
-    
     `;
     }
-
     issuesContainer.appendChild(issueDiv);
   });
+  manageSpinner(false);
   totalCount();
 };
 
 const totalCount = () => {
-  const issuCount = document.getElementById("issue-count");
+  const issueCount = document.getElementById("issue-count");
   const allCount = document.getElementById("issues-container").children.length;
-  issuCount.innerText = allCount;
+  issueCount.innerText = allCount;
   console.log(allCount);
 };
 
 const clickToggle = (id) => {
+  manageSpinner(true);
+
   allBtn.classList.remove("btn-primary");
   openBtn.classList.remove("btn-primary");
   closedBtn.classList.remove("btn-primary");
 
   document.getElementById(id).classList.add("btn-primary");
 
-  if (id === "all-btn") {
-    issues();
-    displayIssues(toggleStatus);
-  } else if (id === "open-btn") {
-    const openIssues = toggleStatus.filter((issue) => issue.status === "open");
-    displayIssues(openIssues);
-  } else if (id === "closed-btn") {
-    const closedIssues = toggleStatus.filter(
-      (issue) => issue.status === "closed",
-    );
-    displayIssues(closedIssues);
-  }
+  setTimeout(() => {
+    if (id === "all-btn") {
+      displayIssues(toggleStatus);
+    } else if (id === "open-btn") {
+      const openIssues = toggleStatus.filter(
+        (issue) => issue.status === "open",
+      );
+      displayIssues(openIssues);
+    } else if (id === "closed-btn") {
+      const closedIssues = toggleStatus.filter(
+        (issue) => issue.status === "closed",
+      );
+      displayIssues(closedIssues);
+    }
+
+    manageSpinner(false);
+  }, 200);
 };
 
+document.getElementById("search-btn").addEventListener("click", () => {
+  const searchInput = document.getElementById("search-input");
+  let searchValue = searchInput.value;
+  manageSpinner(true);
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues`)
+    .then((res) => res.json())
+    .then((search) => {
+      const allSearch = search.data;
+      allBtn.classList.remove("btn-primary");
+      openBtn.classList.remove("btn-primary");
+      closedBtn.classList.remove("btn-primary");
+
+      const matchedData = allSearch.filter((issue) =>
+        issue.title.toLowerCase().includes(searchValue.toLowerCase()),
+      );
+
+      displayIssues(matchedData);
+      manageSpinner(false);
+    });
+});
+
+const manageSpinner = (status) => {
+  if (status == true) {
+    document.getElementById("issues-container").classList.add("hidden");
+    document.getElementById("spinner").classList.remove("hidden");
+  } else {
+    document.getElementById("issues-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
 issues();

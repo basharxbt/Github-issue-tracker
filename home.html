@@ -63,16 +63,17 @@
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" required placeholder="Search issues..." />
+            <input id="search-input" type="search" required placeholder="Search issues..." />
           </label>
-          <button class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> New Issue
+          <button id="search-btn" class="btn btn-primary">
+            Search
           </button>
         </div>
       </div>
     </nav>
 
     <main class="w-10/12 m-auto">
+     
       <section
         class="mt-16 mb-5 p-6 border-2 border-neutral-100 shadow-sm rounded-xl"
       >
@@ -98,6 +99,14 @@
           <p><i class="fa-solid fa-circle" style="color: rgb(135, 96, 246);"></i> closed</p>
         </div>
       </section>
+       <section
+        id="spinner"
+        class="flex justify-center items-center py-20 hiden"
+      >
+        <span
+          class="loading loading-spinner text-primary loading-lg w-15 h-15"
+        ></span>
+      </section>
       <section  class=" mt-10 border-2 border-neutral-100 rounded-md
       ">
    <div id="issues-container" class="grid grid-cols-4 p-5 gap-3 ">
@@ -117,7 +126,7 @@
     </div>
   </div>
 </dialog>
-<span class="text-5xl">.</span>
+
     </main>
     <script src="./issue.js"></script>
   </body>
