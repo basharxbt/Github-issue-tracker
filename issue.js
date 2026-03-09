@@ -109,40 +109,56 @@ const displayIssues = (issues) => {
 
     if (status === "open") {
       issueDiv.innerHTML = `
-         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-green-500 rounded-lg space-y-3 min-h-[350px]">
-  <div class="flex justify-between h-full ">
-        <img src="./assets/Open-Status.png" alt="" />
-       ${priorityAll(issue.priority)}
-      </div>
-      <h3 class="font-semibold text-[20px]"> ${issue.title} </h3>
-      <p class="text-neutral/60">${issue.description}</p>
-      <div class="flex gap-2">
-       ${bugArray(issue.labels)}
-        </div>
-        <hr class="border-neutral/20">
-        <span class="border-t-2"></span>
-        <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
-        <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
+       <div onclick="issueModalDetails(${issue.id})"
+class="shadow-xl p-4 sm:p-5 border-t-4 border-green-500 rounded-lg bg-white flex flex-col h-full">
+  <div class="space-y-3">
+    <div class="flex items-center justify-between">
+      <img class="w-6 h-6 sm:w-7 sm:h-7" src="./assets/Open-Status.png" alt="status" />
+      ${priorityAll(issue.priority)}
     </div>
-    
+    <h3 class="font-semibold text-lg sm:text-xl break-words line-clamp-2 min-h-[3rem]">
+      ${issue.title}
+    </h3>
+    <p class="text-neutral/60 text-sm sm:text-base break-words line-clamp-2">
+      ${issue.description}
+    </p>
+    <div class="flex flex-wrap gap-2">
+      ${bugArray(issue.labels)}
+     </div>
+    </div>
+    <div class="mt-auto">
+    <hr class="border-neutral/20 my-2">
+    <div class="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm text-neutral/60 gap-1">
+      <p>#${issue.id} ${issue.author}</p>
+      <p>${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
+    </div>
+  </div>
+</div>
     `;
     } else if (status === "closed") {
       issueDiv.innerHTML = `
-         <div  onclick='issueModalDetails(${issue.id})' class=" shadow-xl p-5 border-t-3 border-purple-500 rounded-lg space-y-3 min-h-[350px]">
-  <div class="flex justify-between h-full ">
-        <img src="./assets/Closed- Status .png" alt="" />
-        ${priorityAll(issue.priority)}
-      </div>
-      <h3 class="font-semibold text-[20px]"> ${issue.title} </h3>
-      <p class="text-neutral/60">${issue.description}</p>
-      <div class="flex gap-2">
-        ${bugArray(issue.labels)}
-        </div>
-       <hr class="border-neutral/20">
-        <span class="border-t-2"></span>
-        <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
-        <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
+        <div onclick='issueModalDetails(${issue.id})' class="shadow-xl p-4 sm:p-5 border-t-4 border-green-500 rounded-lg bg-white flex flex-col h-full">
+     <div class="flex justify-between">
+    <img src="./assets/Closed- Status .png" alt="" />
+    ${priorityAll(issue.priority)}
+  </div>
+  <h3 class="font-semibold text-lg sm:text-xl break-words min-h-[3rem] line-clamp-2">
+    ${issue.title}
+  </h3>
+  <p class="text-neutral/60 text-sm sm:text-base break-words line-clamp-2">
+    ${issue.description}
+  </p>
+  <div class="flex flex-wrap gap-2">
+    ${bugArray(issue.labels)}
+  </div>
+  <div class="mt-auto">
+    <hr class="border-neutral/20 my-2">
+    <div class="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm text-neutral/60 gap-1">
+      <p class="text-neutral/60">#${issue.id} ${issue.author}</p>
+      <p class="text-neutral/60">${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
     </div>
+  </div>
+</div>
     `;
     }
     issuesContainer.appendChild(issueDiv);
